@@ -31,3 +31,7 @@ async def predict(item: ScoringItem):
         return JSONResponse(content=result, status_code=200)
     except Exception as e:
         return JSONResponse(content={"error": str(e)}, status_code=500)
+
+@app.get('/')
+async def read_root():
+    return "Welcome to Mental Wellness ChatBot!"
