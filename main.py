@@ -13,10 +13,10 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],  # Update this based on your needs during development
     allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["*"],
+    allow_headers=["*", "Content-Type"],
 )
 
 class ScoringItem(BaseModel):
@@ -24,7 +24,7 @@ class ScoringItem(BaseModel):
 
 client = Client("https://givyboy-mental-health-chatbot.hf.space/--replicas/04p3w/", verbose=True)
 
-@app.post("/predict")
+@app.post("/chat")
 async def predict(item: ScoringItem):
     try:
         result = client.predict(item.message, api_name="/chat")
